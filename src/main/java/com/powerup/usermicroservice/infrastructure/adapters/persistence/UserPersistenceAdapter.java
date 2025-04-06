@@ -2,6 +2,7 @@ package com.powerup.usermicroservice.infrastructure.adapters.persistence;
 
 import com.powerup.usermicroservice.domain.model.UserModel;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
+import com.powerup.usermicroservice.infrastructure.entities.UserEntity;
 import com.powerup.usermicroservice.infrastructure.mappers.UserEntityMapper;
 import com.powerup.usermicroservice.infrastructure.repositories.mysql.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,8 @@ public class UserPersistenceAdapter implements UserPersistencePort {
     
     @Override
     public void save(UserModel userModel) {
-        userRepository.save(userEntityMapper.modelToEntity(userModel));
+        UserEntity userEntity = userEntityMapper.modelToEntity(userModel);
+        userRepository.save(userEntity);
     }
 
     @Override

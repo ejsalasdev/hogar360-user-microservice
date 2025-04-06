@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class UserEntity {
     private String name;
     
     @Column(nullable = false, length = 50)
-    private String apellido;
+    private String lastName;
     
     @Column(nullable = false, length = 10, unique = true)
     private String documentId;
@@ -28,8 +30,8 @@ public class UserEntity {
     @Column(nullable = false, length = 13, unique = true)
     private String phoneNumber;
     
-    @Column(nullable = false, length = 8, unique = true)
-    private String birthDate;
+    @Column(nullable = false)
+    private LocalDate birthDate;
     
     @Column(nullable = false, length = 50, unique = true)
     private String email;

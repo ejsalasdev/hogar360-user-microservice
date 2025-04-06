@@ -5,7 +5,7 @@ import com.powerup.usermicroservice.infrastructure.entities.UserEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = {RoleEntityMapper.class})
 public interface UserEntityMapper {
     
     @Mapping(source = "role", target = "role")

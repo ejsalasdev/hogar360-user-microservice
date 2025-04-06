@@ -7,7 +7,7 @@ public class UserModel {
     private Long id;
     private String name;
     private String lastName;
-    private String documentID;
+    private String documentId;
     private String phoneNumber;
     private LocalDate birthDate;
     private String email;
@@ -15,13 +15,13 @@ public class UserModel {
     private RoleModel role;
 
     public UserModel(
-            Long id, String name, String lastName, String documentID, String phoneNumber,
+            Long id, String name, String lastName, String documentId, String phoneNumber,
             LocalDate birthDate, String email, String password, RoleModel role
     ) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
-        this.documentID = documentID;
+        this.documentId = documentId;
         this.phoneNumber = phoneNumber;
         this.birthDate = birthDate;
         this.email = email;
@@ -49,12 +49,12 @@ public class UserModel {
         this.lastName = lastName;
     }
 
-    public String getDocumentID() {
-        return documentID;
+    public String getDocumentId() {
+        return documentId;
     }
 
-    public void setDocumentID(String documentID) {
-        this.documentID = documentID;
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
     }
 
     public String getPhoneNumber() {
