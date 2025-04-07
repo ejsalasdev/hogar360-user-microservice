@@ -9,7 +9,7 @@ public final class UserConstants {
     public static final Integer DOCUMENT_ID_MIN_LENGTH = 8;
     public static final String ONLY_NUMERIC_REGEX = "^\\d+$";
     public static final String ONLY_STRING_REGEX = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]+$";
-    public static final String EMAIL_FORMAT_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+    public static final String EMAIL_FORMAT_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.[A-Za-z]{2,}$";
     public static final Integer PHONE_NUMBER_MAX_LENGTH = 13;
     public static final Integer PHONE_NUMBER_MIN_LENGTH = 10;
     public static final String PHONE_NUMBER_FORMAT_REGEX = "^\\+?\\d+$";
