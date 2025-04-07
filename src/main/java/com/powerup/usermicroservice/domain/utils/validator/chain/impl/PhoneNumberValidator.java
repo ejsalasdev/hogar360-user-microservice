@@ -2,6 +2,8 @@ package com.powerup.usermicroservice.domain.utils.validator.chain.impl;
 
 import com.powerup.usermicroservice.domain.exceptions.InvalidElementFormatException;
 import com.powerup.usermicroservice.domain.model.UserModel;
+import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
+import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.chain.UserDataValidator;
 
 public class PhoneNumberValidator implements UserDataValidator {
@@ -12,11 +14,12 @@ public class PhoneNumberValidator implements UserDataValidator {
     public void validate(UserModel userModel) {
         if (
                 userModel.getPhoneNumber() != null && !userModel.getPhoneNumber().trim().isEmpty() &&
-                        (userModel.getPhoneNumber().length() > 13 || !userModel.getPhoneNumber().matches("^\\+?\\d+$"))
+                        !userModel.getPhoneNumber().matches(UserConstants.PHONE_NUMBER_FORMAT_REGEX)
         ) {
-            throw new InvalidElementFormatException("El formato del número de celular no es válido (máximo 13 caracteres, puede incluir +).");
+            throw new InvalidElementFormatException(
+                    String.format(DomainExceptionsConstants.PHONE_NUMBER_INVALID_FORMAT_MESSAGE)
+            );
         }
-
 
         if (nextValidator != null) {
             nextValidator.validate(userModel);

@@ -6,15 +6,33 @@ import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConst
 import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.chain.UserDataValidator;
 
-public class DocumentIdValidator implements UserDataValidator {
-    
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class StringOnlyValidator implements UserDataValidator {
+
     private UserDataValidator nextValidator;
+    private final String fieldName;
+
+    public StringOnlyValidator(String fieldName) {
+        this.fieldName = fieldName;
+    }
+
     @Override
     public void validate(UserModel userModel) {
-        if (userModel.getDocumentId() != null && !userModel.getDocumentId().trim().isEmpty()) {
-            if (!userModel.getDocumentId().matches(UserConstants.ONLY_NUMERIC_REGEX)) {
+        String value = "";
+        if (fieldName.equals("name")) {
+            value = userModel.getName();
+        } else if (fieldName.equals("lastName")) {
+            value = userModel.getLastName();
+        }
+
+        if (value != null && !value.trim().isEmpty()) {
+            Pattern pattern = Pattern.compile(UserConstants.ONLY_STRING_REGEX);
+            Matcher matcher = pattern.matcher(value);
+            if (!matcher.matches()) {
                 throw new InvalidElementFormatException(
-                        String.format(DomainExceptionsConstants.DOCUMENT_ID_NOT_NUMERIC_MESSAGE)
+                        String.format(DomainExceptionsConstants.STRING_INPUT_FORMAT_ERROR_MESSAGE, fieldName, value)
                 );
             }
         }

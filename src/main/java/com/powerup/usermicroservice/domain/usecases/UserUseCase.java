@@ -4,7 +4,7 @@ import com.powerup.usermicroservice.domain.exceptions.ElementAlreadyExistsExcept
 import com.powerup.usermicroservice.domain.model.UserModel;
 import com.powerup.usermicroservice.domain.ports.in.UserServicePort;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
-import com.powerup.usermicroservice.domain.utils.constants.DomainConstants;
+import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
 import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.UserValidatorChain;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,7 +29,7 @@ public class UserUseCase implements UserServicePort {
         
         Optional<UserModel> user = userPersistencePort.getUserByDocumentId(userModel.getDocumentId());
         if (user.isPresent()) {
-            throw new ElementAlreadyExistsException(String.format(DomainConstants.USER_ALREADY_EXIST_MESSAGE, userModel.getDocumentId()));
+            throw new ElementAlreadyExistsException(String.format(DomainExceptionsConstants.USER_ALREADY_EXIST_MESSAGE, userModel.getDocumentId()));
         }
         
         String encodedPassword = passwordEncoder.encode(userModel.getPassword());

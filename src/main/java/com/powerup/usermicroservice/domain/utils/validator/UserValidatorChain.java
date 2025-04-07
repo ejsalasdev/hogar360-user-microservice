@@ -6,19 +6,27 @@ import com.powerup.usermicroservice.domain.utils.validator.chain.impl.*;
 
 public class UserValidatorChain {
     
-    private UserDataValidator firstValidator;
+    private final UserDataValidator firstValidator;
 
     public UserValidatorChain() {
         
         UserDataValidator requiredFieldsValidator = new RequiredFieldsValidator();
+        UserDataValidator stringOnlyInNameValidator = new StringOnlyValidator("name");
+        UserDataValidator stringOnlyInLastNameValidator = new StringOnlyValidator("lastName");
         UserDataValidator documentIdValidator = new DocumentIdValidator();
+        UserDataValidator documentIdLengthValidator = new DocumentIdLengthValidator();
         UserDataValidator phoneNumberValidator = new PhoneNumberValidator();
+        UserDataValidator phoneNumberLengthValidator = new PhoneNumberLengthValidator();
         UserDataValidator requiredAgeValidator = new RequiredAgeValidator();
         UserDataValidator emailFormatValidator = new EmailFormatValidator();
         
-        requiredFieldsValidator.setNextValidator(documentIdValidator);
-        documentIdValidator.setNextValidator(phoneNumberValidator);
-        phoneNumberValidator.setNextValidator(requiredAgeValidator);
+        requiredFieldsValidator.setNextValidator(stringOnlyInNameValidator);
+        stringOnlyInNameValidator.setNextValidator(stringOnlyInLastNameValidator);
+        stringOnlyInLastNameValidator.setNextValidator(documentIdValidator);
+        documentIdValidator.setNextValidator(documentIdLengthValidator);
+        documentIdLengthValidator.setNextValidator(phoneNumberValidator);
+        phoneNumberValidator.setNextValidator(phoneNumberLengthValidator);
+        phoneNumberLengthValidator.setNextValidator(requiredAgeValidator);
         requiredAgeValidator.setNextValidator(emailFormatValidator);
         
         this.firstValidator = requiredFieldsValidator;

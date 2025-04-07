@@ -2,6 +2,8 @@ package com.powerup.usermicroservice.domain.utils.validator.chain.impl;
 
 import com.powerup.usermicroservice.domain.exceptions.UnderAgeException;
 import com.powerup.usermicroservice.domain.model.UserModel;
+import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
+import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.chain.UserDataValidator;
 
 import java.time.LocalDate;
@@ -14,10 +16,12 @@ public class RequiredAgeValidator implements UserDataValidator {
     @Override
     public void validate(UserModel userModel) {
         if (userModel.getBirthDate() != null) {
-            LocalDate now = LocalDate.now(ZoneId.of("America/Bogota"));
+            LocalDate now = LocalDate.now(ZoneId.of(UserConstants.TIME_ZONE));
             Period period = Period.between(userModel.getBirthDate(), now);
-            if (period.getYears() < 18) {
-                throw new UnderAgeException("El usuario debe ser mayor de edad.");
+            if (period.getYears() < UserConstants.ADULT_AGE) {
+                throw new UnderAgeException(
+                        String.format(DomainExceptionsConstants.USER_UNDER_AGE_VALID_MESSAGE)
+                );
             }
         }
 
