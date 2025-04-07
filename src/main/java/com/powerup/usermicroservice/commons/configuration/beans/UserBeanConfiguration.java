@@ -3,6 +3,7 @@ package com.powerup.usermicroservice.commons.configuration.beans;
 import com.powerup.usermicroservice.domain.ports.in.UserServicePort;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
 import com.powerup.usermicroservice.domain.usecases.UserUseCase;
+import com.powerup.usermicroservice.domain.utils.validator.UserValidatorChain;
 import com.powerup.usermicroservice.infrastructure.adapters.persistence.UserPersistenceAdapter;
 import com.powerup.usermicroservice.infrastructure.mappers.UserEntityMapper;
 import com.powerup.usermicroservice.infrastructure.repositories.mysql.UserRepository;
@@ -25,7 +26,12 @@ public class UserBeanConfiguration {
     }
     
     @Bean
+    public UserValidatorChain userValidatorChain() {
+        return new UserValidatorChain();
+    }
+    
+    @Bean
     public UserServicePort userServicePort() {
-        return new UserUseCase(userPersistencePort(), passwordEncoder);
+        return new UserUseCase(userPersistencePort(), passwordEncoder, userValidatorChain());
     }
 }
