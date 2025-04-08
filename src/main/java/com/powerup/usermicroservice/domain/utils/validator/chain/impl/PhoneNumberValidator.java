@@ -12,10 +12,8 @@ public class PhoneNumberValidator implements UserDataValidator {
 
     @Override
     public void validate(UserModel userModel) {
-        if (
-                userModel.getPhoneNumber() != null && !userModel.getPhoneNumber().trim().isEmpty() &&
-                        !userModel.getPhoneNumber().matches(UserConstants.PHONE_NUMBER_FORMAT_REGEX)
-        ) {
+        if (userModel.getPhoneNumber() != null && !userModel.getPhoneNumber().trim().isEmpty() &&
+                !userModel.getPhoneNumber().matches(UserConstants.PHONE_NUMBER_FORMAT_REGEX)) {
             throw new InvalidElementFormatException(
                     String.format(DomainExceptionsConstants.PHONE_NUMBER_INVALID_FORMAT_MESSAGE)
             );

@@ -13,12 +13,12 @@ public class DocumentIdLengthValidator implements UserDataValidator {
     @Override
     public void validate(UserModel userModel) {
         String documentId = userModel.getDocumentId();
-        if (documentId != null && !documentId.trim().isEmpty()) {
-            if (documentId.length() < UserConstants.DOCUMENT_ID_MIN_LENGTH || documentId.length() > UserConstants.DOCUMENT_ID_MAX_LENGTH) {
-                throw new InvalidElementLengthException(
-                        String.format(DomainExceptionsConstants.DOCUMENT_ID_INVALID_LENGTH_MESSAGE)
-                );
-            }
+        if (documentId != null && !documentId.trim().isEmpty() &&
+                (documentId.length() < UserConstants.DOCUMENT_ID_MIN_LENGTH ||
+                        documentId.length() > UserConstants.DOCUMENT_ID_MAX_LENGTH)) {
+            throw new InvalidElementLengthException(
+                    String.format(DomainExceptionsConstants.DOCUMENT_ID_INVALID_LENGTH_MESSAGE)
+            );
         }
 
         if (nextValidator != null) {

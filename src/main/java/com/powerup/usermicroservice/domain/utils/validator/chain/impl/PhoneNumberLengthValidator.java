@@ -13,14 +13,13 @@ public class PhoneNumberLengthValidator implements UserDataValidator {
     @Override
     public void validate(UserModel userModel) {
         String phoneNumber = userModel.getPhoneNumber();
-        
-        if (phoneNumber != null && !phoneNumber.trim().isEmpty()) {
-            if (phoneNumber.length() < UserConstants.PHONE_NUMBER_MIN_LENGTH ||
-                    phoneNumber.length() > UserConstants.PHONE_NUMBER_MAX_LENGTH) {
-                throw new InvalidElementLengthException(
-                        String.format(DomainExceptionsConstants.PHONE_NUMBER_INVALID_LENGTH_MESSAGE)
-                );
-            }
+
+        if (phoneNumber != null && !phoneNumber.trim().isEmpty() &&
+                (phoneNumber.length() < UserConstants.PHONE_NUMBER_MIN_LENGTH ||
+                        phoneNumber.length() > UserConstants.PHONE_NUMBER_MAX_LENGTH)) {
+            throw new InvalidElementLengthException(
+                    String.format(DomainExceptionsConstants.PHONE_NUMBER_INVALID_LENGTH_MESSAGE)
+            );
         }
 
         if (nextValidator != null) {

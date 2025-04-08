@@ -3,6 +3,7 @@ package com.powerup.usermicroservice.infrastructure.controllers.rest;
 import com.powerup.usermicroservice.application.dto.request.SaveUserRequest;
 import com.powerup.usermicroservice.application.dto.response.SaveUserResponse;
 import com.powerup.usermicroservice.application.handler.UserHandler;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/user")
 @RequiredArgsConstructor
-@Tag(name = "User", description = "Create seller user operation")
+@Tag(name = "User", description = "Operations related to users")
 public class UserController {
     
     private final UserHandler userHandler;
-    
+
+    @Operation(summary = "Create a new seller user")
     @PostMapping("/")
     public ResponseEntity<SaveUserResponse> save(@RequestBody SaveUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.save(request));
