@@ -3,23 +3,23 @@ package com.powerup.usermicroservice.domain.usecases;
 import com.powerup.usermicroservice.domain.exceptions.ElementAlreadyExistsException;
 import com.powerup.usermicroservice.domain.model.UserModel;
 import com.powerup.usermicroservice.domain.ports.in.UserServicePort;
+import com.powerup.usermicroservice.domain.ports.out.PasswordEncoderPort;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
 import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
 import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.UserValidatorChain;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
 public class UserUseCase implements UserServicePort {
     
     private final UserPersistencePort userPersistencePort;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoderPort passwordEncoderPort;
     private final UserValidatorChain userValidatorChain;
 
-    public UserUseCase(UserPersistencePort userPersistencePort, PasswordEncoder passwordEncoder, UserValidatorChain userValidatorChain) {
+    public UserUseCase(UserPersistencePort userPersistencePort, PasswordEncoderPort passwordEncoderPort, UserValidatorChain userValidatorChain) {
         this.userPersistencePort = userPersistencePort;
-        this.passwordEncoder = passwordEncoder;
+        this.passwordEncoderPort = passwordEncoderPort;
         this.userValidatorChain = userValidatorChain;
     }
 
@@ -32,7 +32,7 @@ public class UserUseCase implements UserServicePort {
             throw new ElementAlreadyExistsException(String.format(DomainExceptionsConstants.USER_ALREADY_EXIST_MESSAGE, userModel.getDocumentId()));
         }
         
-        String encodedPassword = passwordEncoder.encode(userModel.getPassword());
+        String encodedPassword = passwordEncoderPort.encode(userModel.getPassword());
         userModel.setPassword(encodedPassword);
         userModel.setRole(UserConstants.SELLER_ROLE);
         

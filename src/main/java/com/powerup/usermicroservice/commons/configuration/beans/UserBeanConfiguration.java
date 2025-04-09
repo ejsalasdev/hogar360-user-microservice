@@ -1,6 +1,7 @@
 package com.powerup.usermicroservice.commons.configuration.beans;
 
 import com.powerup.usermicroservice.domain.ports.in.UserServicePort;
+import com.powerup.usermicroservice.domain.ports.out.PasswordEncoderPort;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
 import com.powerup.usermicroservice.domain.usecases.UserUseCase;
 import com.powerup.usermicroservice.domain.utils.validator.UserValidatorChain;
@@ -10,7 +11,6 @@ import com.powerup.usermicroservice.infrastructure.repositories.mysql.UserReposi
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,7 +18,7 @@ public class UserBeanConfiguration {
 
     private final UserRepository userRepository;
     private final UserEntityMapper userEntityMapper;
-    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoderPort passwordEncoderPort;
     
     @Bean
     public UserPersistencePort userPersistencePort() {
@@ -32,6 +32,6 @@ public class UserBeanConfiguration {
     
     @Bean
     public UserServicePort userServicePort() {
-        return new UserUseCase(userPersistencePort(), passwordEncoder, userValidatorChain());
+        return new UserUseCase(userPersistencePort(), passwordEncoderPort, userValidatorChain());
     }
 }

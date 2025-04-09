@@ -1,6 +1,7 @@
 package com.powerup.usermicroservice.domain.utils.validator;
 
 import com.powerup.usermicroservice.domain.model.UserModel;
+import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.chain.UserDataValidator;
 import com.powerup.usermicroservice.domain.utils.validator.chain.impl.*;
 
@@ -11,8 +12,8 @@ public class UserValidatorChain {
     public UserValidatorChain() {
         
         UserDataValidator requiredFieldsValidator = new RequiredFieldsValidator();
-        UserDataValidator stringOnlyInNameValidator = new StringOnlyValidator("name");
-        UserDataValidator stringOnlyInLastNameValidator = new StringOnlyValidator("lastName");
+        UserDataValidator stringOnlyInNameValidator = new StringOnlyValidator(UserConstants.NAME_FIELD);
+        UserDataValidator stringOnlyInLastNameValidator = new StringOnlyValidator(UserConstants.LAST_NAME_FIELD);
         UserDataValidator documentIdValidator = new DocumentIdValidator();
         UserDataValidator documentIdLengthValidator = new DocumentIdLengthValidator();
         UserDataValidator phoneNumberValidator = new PhoneNumberValidator();

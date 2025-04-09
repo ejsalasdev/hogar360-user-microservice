@@ -21,9 +21,9 @@ public class StringOnlyValidator implements UserDataValidator {
     @Override
     public void validate(UserModel userModel) {
         String value = "";
-        if (fieldName.equals("name")) {
+        if (fieldName.equals(UserConstants.NAME_FIELD)) {
             value = userModel.getName();
-        } else if (fieldName.equals("lastName")) {
+        } else if (fieldName.equals(UserConstants.LAST_NAME_FIELD)) {
             value = userModel.getLastName();
         }
 

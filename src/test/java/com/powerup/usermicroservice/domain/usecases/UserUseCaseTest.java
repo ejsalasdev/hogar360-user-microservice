@@ -3,6 +3,7 @@ package com.powerup.usermicroservice.domain.usecases;
 import com.powerup.usermicroservice.domain.exceptions.ElementAlreadyExistsException;
 import com.powerup.usermicroservice.domain.model.RoleModel;
 import com.powerup.usermicroservice.domain.model.UserModel;
+import com.powerup.usermicroservice.domain.ports.out.PasswordEncoderPort;
 import com.powerup.usermicroservice.domain.ports.out.UserPersistencePort;
 import com.powerup.usermicroservice.domain.utils.constants.UserConstants;
 import com.powerup.usermicroservice.domain.utils.validator.UserValidatorChain;
@@ -11,7 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -26,7 +26,7 @@ class UserUseCaseTest {
     private UserPersistencePort userPersistencePort;
 
     @Mock
-    private PasswordEncoder passwordEncoder;
+    private PasswordEncoderPort passwordEncoderPort;
 
     @Mock
     private UserValidatorChain userValidatorChain;
@@ -57,7 +57,7 @@ class UserUseCaseTest {
     void When_NewUserProvided_Expect_UserToBeSavedSuccessfully() {
         // Arrange
         when(userPersistencePort.getUserByDocumentId(userModel.getDocumentId())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(userModel.getPassword())).thenReturn("encodedPassword");
+        when(passwordEncoderPort.encode(userModel.getPassword())).thenReturn("encodedPassword");
 
         // Act
         userUseCase.save(userModel);
@@ -84,7 +84,7 @@ class UserUseCaseTest {
     void When_SaveUserCalled_Expect_UserValidatorChainIsInvoked() {
         // Arrange
         when(userPersistencePort.getUserByDocumentId(userModel.getDocumentId())).thenReturn(Optional.empty());
-        when(passwordEncoder.encode(userModel.getPassword())).thenReturn("encodedPassword");
+        when(passwordEncoderPort.encode(userModel.getPassword())).thenReturn("encodedPassword");
 
         // Act
         userUseCase.save(userModel);

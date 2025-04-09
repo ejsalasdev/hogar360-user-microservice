@@ -15,6 +15,14 @@ public final class UserConstants {
     public static final String PHONE_NUMBER_FORMAT_REGEX = "^\\+?\\d+$";
     public static final String TIME_ZONE = "America/Bogota";
     public static final Integer ADULT_AGE = 18;
+
+    public static final String NAME_FIELD = "name";
+    public static final String LAST_NAME_FIELD = "lastName";
+    public static final String DOCUMENT_ID_FIELD = "documentId";
+    public static final String PHONE_NUMBER_FIELD = "phoneNumber";
+    public static final String BIRTH_DATE_FIELD = "birthDate";
+    public static final String EMAIL_FIELD = "email";
+    public static final String PASSWORD_FIELD = "password";
     
     private UserConstants() {
         throw new IllegalStateException("Utility Class");
