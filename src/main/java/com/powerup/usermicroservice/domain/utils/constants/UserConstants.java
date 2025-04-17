@@ -1,10 +1,11 @@
 package com.powerup.usermicroservice.domain.utils.constants;
 
+import com.powerup.usermicroservice.domain.enums.RoleName;
 import com.powerup.usermicroservice.domain.model.RoleModel;
 
 public final class UserConstants {
     
-    public static final RoleModel SELLER_ROLE = new RoleModel(1L, "seller", "User with seller role");
+    public static final RoleModel SELLER_ROLE = new RoleModel(2L, RoleName.SELLER, "User with seller role");
     public static final Integer DOCUMENT_ID_MAX_LENGTH = 10;
     public static final Integer DOCUMENT_ID_MIN_LENGTH = 8;
     public static final String ONLY_NUMERIC_REGEX = "^\\d+$";

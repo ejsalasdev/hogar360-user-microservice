@@ -1,5 +1,6 @@
 package com.powerup.usermicroservice.infrastructure.entities;
 
+import com.powerup.usermicroservice.domain.enums.RoleName;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,8 +17,9 @@ public class RolEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 15, unique = true)
-    private String name;
+    private RoleName name;
     
     @Column(nullable = false, length = 90)
     private String description;

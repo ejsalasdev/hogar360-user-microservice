@@ -14,3 +14,12 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+jwt:
+  secret: ${JWT_SECRET}
+  user: AUTH0JWT_BACKEND
+  expiration: 86400000
+
+#logging:
+#  level:
+#    root: debug
