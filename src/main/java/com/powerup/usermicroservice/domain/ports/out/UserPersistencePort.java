@@ -8,4 +8,6 @@ public interface UserPersistencePort {
     
     void save(UserModel userModel);
     Optional<UserModel> getUserByDocumentId(String documentId);
+
+    Optional<UserModel> getUserByEmail(String email);
 }

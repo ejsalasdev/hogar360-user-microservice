@@ -1,12 +1,14 @@
 package com.powerup.usermicroservice.domain.model;
 
+import com.powerup.usermicroservice.domain.enums.RoleName;
+
 public class RoleModel {
-    
+
     private Long id;
-    private String name;
+    private RoleName name;
     private String description;
 
-    public RoleModel(Long id, String name, String description) {
+    public RoleModel(Long id, RoleName name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -16,12 +18,16 @@ public class RoleModel {
         return id;
     }
 
-    public String getName() {
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public RoleName getRoleEnum() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleEnum(RoleName roleName) {
+        this.name = roleName;
     }
 
     public String getDescription() {

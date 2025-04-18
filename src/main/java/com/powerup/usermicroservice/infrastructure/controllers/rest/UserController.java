@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("api/v1/user")
+@RequestMapping("/api/v1/user")
 @RequiredArgsConstructor
 @Tag(name = "User", description = "Operations related to users")
 public class UserController {
@@ -22,7 +22,7 @@ public class UserController {
     private final UserHandler userHandler;
 
     @Operation(summary = "Create a new seller user")
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<SaveUserResponse> save(@RequestBody SaveUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.save(request));
     }

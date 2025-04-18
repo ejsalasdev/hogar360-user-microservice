@@ -1,5 +1,6 @@
 package com.powerup.usermicroservice.domain.usecases;
 
+import com.powerup.usermicroservice.domain.enums.RoleName;
 import com.powerup.usermicroservice.domain.exceptions.ElementAlreadyExistsException;
 import com.powerup.usermicroservice.domain.model.RoleModel;
 import com.powerup.usermicroservice.domain.model.UserModel;
@@ -39,7 +40,7 @@ class UserUseCaseTest {
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-        RoleModel sellerRole = new RoleModel(1L, "vendedor", "Usuario con rol de vendedor");
+        RoleModel sellerRole = new RoleModel(2L, RoleName.SELLER, "Usuario con rol de vendedor");
         userModel = new UserModel(
                 null,
                 "Test",
