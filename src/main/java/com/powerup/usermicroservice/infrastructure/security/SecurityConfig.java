@@ -1,7 +1,6 @@
 package com.powerup.usermicroservice.infrastructure.security;
 
 import com.powerup.usermicroservice.infrastructure.security.jwt.JwtTokenValidator;
-import com.powerup.usermicroservice.infrastructure.security.jwt.JwtUtils;
 import com.powerup.usermicroservice.infrastructure.security.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +24,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 @RequiredArgsConstructor
 public class SecurityConfig {
 
-    private final JwtUtils jwtUtils;
+    private final JwtTokenValidator jwtTokenValidator;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -39,7 +38,7 @@ public class SecurityConfig {
 
                     http.anyRequest().denyAll();
                 })
-                .addFilterBefore(new JwtTokenValidator(jwtUtils), BasicAuthenticationFilter.class)
+                .addFilterBefore(jwtTokenValidator, BasicAuthenticationFilter.class)
                 .build();
     }
     

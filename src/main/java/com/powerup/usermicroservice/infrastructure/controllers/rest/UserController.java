@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/user")
-@PreAuthorize("denyAll()")
 @RequiredArgsConstructor
 @Tag(name = "User", description = "Operations related to users")
 public class UserController {
@@ -25,7 +23,6 @@ public class UserController {
 
     @Operation(summary = "Create a new seller user")
     @PostMapping("/create")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<SaveUserResponse> save(@RequestBody SaveUserRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userHandler.save(request));
     }
