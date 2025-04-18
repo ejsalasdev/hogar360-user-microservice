@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @RequiredArgsConstructor
 public class AuthHandlerImpl implements AuthHandler {
@@ -31,6 +33,6 @@ public class AuthHandlerImpl implements AuthHandler {
         
         String accessToken = jwtUtils.createToken(authentication);
 
-        return new LoginResponse(accessToken);
+        return new LoginResponse(accessToken, LocalDateTime.now());
     }
 }
