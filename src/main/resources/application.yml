@@ -1,11 +1,11 @@
 server:
-  port: 8082
-
+  port: ${SERVER_PORT:8082}
+  
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/hogar360_user_db
-    username: root
-    password: toor
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:hogar360_user_db}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:toor}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
@@ -14,12 +14,17 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:data.sql
 jwt:
   secret: ${JWT_SECRET}
-  user: AUTH0JWT_BACKEND
-  expiration: 86400000
+  user: ${JWT_USER:AUTH0JWT_BACKEND}
+  expiration: ${JWT_EXPIRATION:86400000}
 
+# Uncomment the following lines to enable debug logging
+  
 #logging:
 #  level:
 #    root: debug
