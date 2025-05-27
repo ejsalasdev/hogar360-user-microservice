@@ -37,10 +37,3 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-microservice:latest
           platforms: linux/amd64
-
-      - name: Trigger Dokploy Deployment
-        if: ${{ success() }}
-        run: |
-          curl -f -X POST "${{ secrets.DOKPLOY_API_KEY }}" \
-            -H "Content-Type: application/json" \
-            -d '{ "force": true }'
