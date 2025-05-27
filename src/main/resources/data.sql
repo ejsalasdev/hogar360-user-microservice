@@ -13,7 +13,7 @@ SELECT '12345678',
        'admin@sistema.com',
        '+1234567890',
        '1990-01-01',
-       '$2a$10$N.zmdr9k7uOCQb96VdodL.ZHPvsw5n5YmYW5n4CfPfGpS',
+       '$2a$10$/eKHQRAMk6FxBP1LiUFiz.eJwSfNYB5t0mrTUNAyG0PnnjQ8.MlZO',
        r.id
 FROM roles r
 WHERE r.name = 'ADMIN'

@@ -48,12 +48,12 @@ public class SecurityConfig {
                 .addFilterBefore(jwtTokenValidator, BasicAuthenticationFilter.class)
                 .build();
     }
-    
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
-    
+
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsServiceImpl userDetailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -61,7 +61,7 @@ public class SecurityConfig {
         provider.setUserDetailsService(userDetailsService);
         return provider;
     }
-    
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -70,7 +70,9 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));
+        configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:4200", "http://localhost:8082"
+        ));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
