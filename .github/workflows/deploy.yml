@@ -44,6 +44,5 @@ jobs:
         with:
           url: ${{ secrets.DOKPLOY_API_KEY}}
           method: POST
-          headers:
-            Content-Type: "application/json"
+          headers: '{"Content-Type": "application/json"}'
           body: '{ "force": true }'
