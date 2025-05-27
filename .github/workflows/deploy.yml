@@ -40,9 +40,7 @@ jobs:
 
       - name: Trigger Dokploy Deployment
         if: ${{ success() }}
-        uses: actions/http-client@v2
-        with:
-          url: ${{ secrets.DOKPLOY_API_KEY}}
-          method: POST
-          headers: '{"Content-Type": "application/json"}'
-          body: '{ "force": true }'
+        run: |
+          curl -X POST "${{ secrets.DOKPLOY_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{ "force": true }'
