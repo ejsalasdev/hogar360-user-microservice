@@ -42,8 +42,8 @@ jobs:
         if: ${{ success() }}
         uses: actions/http-client@v2
         with:
-          url: 'https://panel.hogar360.site/api/deploy/sVxTdt8GsBx2L2-_k9FhA'
+          url: ${{ secrets.DOKPLOY_API_KEY}}
           method: POST
           headers:
-            '{ "Content-Type": "application/json" }'
+            Content-Type: "application/json"
           body: '{ "force": true }'
