@@ -6,7 +6,7 @@ INSERT IGNORE INTO roles (name, description) VALUES
 
 -- Insertar usuario administrador por defecto (solo si no existe)
 -- Password: admin123 (encriptada con BCrypt)
-INSERT IGNORE INTO users (documentNnumber, name, lastName, email, phone, birthdate, password, role_id)
+INSERT IGNORE INTO users (documentNumber, name, lastName, email, phone, birthdate, password, role_id)
 SELECT 
     '12345678',
     'Administrador',
