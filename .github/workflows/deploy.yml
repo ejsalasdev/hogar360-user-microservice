@@ -1,0 +1,49 @@
+name: Build and Push User Microservice Docker Image
+
+on:
+  push:
+    branches: ["develop"]
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Build with Gradle
+        run: ./gradlew build -x test
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/user-microservice:latest
+          platforms: linux/amd64
+
+      - name: Trigger Dokploy Deployment
+        if: ${{ success() }}
+        uses: actions/http-client@v2
+        with:
+          url: 'https://panel.hogar360.site/api/deploy/sVxTdt8GsBx2L2-_k9FhA'
+          method: POST
+          headers:
+            '{ "Content-Type": "application/json" }'
+          body: '{ "force": true }'
