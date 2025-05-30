@@ -1,47 +1,68 @@
 package com.powerup.usermicroservice.application.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
-
 import java.time.LocalDate;
 
-@Schema(description = "User creation request")
+@Schema(description = "Request to create a new seller user in the system")
 public record SaveUserRequest(
-        @NotBlank(message = "Name is required")
-        @Size(min = 2, max = 50, message = "Name must be between 2 and 50 characters")
-        @Schema(description = "User's first name", example = "John")
+        @Schema(
+                description = "User's first name. Must contain only letters and spaces.",
+                example = "Juan Carlos",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String name,
 
-        @NotBlank(message = "Last name is required")
-        @Size(min = 2, max = 50, message = "Last name must be between 2 and 50 characters")
-        @Schema(description = "User's last name", example = "Doe")
+        @Schema(
+                description = "User's last name. Must contain only letters and spaces.",
+                example = "Pérez García",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String lastName,
 
-        @NotBlank(message = "Document ID is required")
-        @Pattern(regexp = "^\\d+$", message = "Document ID must contain only numbers")
-        @Size(min = 8, max = 10, message = "Document ID must be between 8 and 10 digits")
-        @Schema(description = "User's document ID", example = "12345678")
+        @Schema(
+                description = "User's document ID. Must be numeric only, between 8-10 digits. Must be unique in the system.",
+                example = "12345678",
+                minLength = 8,
+                maxLength = 10,
+                pattern = "^\\d+$",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String documentId,
 
-        @NotBlank(message = "Phone number is required")
-        @Pattern(regexp = "^\\+?\\d+$", message = "Invalid phone number format")
-        @Size(min = 10, max = 13, message = "Phone number must be between 10 and 13 digits")
-        @Schema(description = "User's phone number", example = "+573001234567")
+        @Schema(
+                description = "User's phone number. Can include '+' prefix for international format. Must be between 10-13 digits. Must be unique in the system.",
+                example = "+573001234567",
+                minLength = 10,
+                maxLength = 13,
+                pattern = "^\\+?\\d+$",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String phoneNumber,
 
-        @NotNull(message = "Birth date is required")
-        @Past(message = "Birth date must be in the past")
-        @Schema(description = "User's birth date (YYYY-MM-DD)", example = "1990-01-15", type = "string", format = "date")
+        @Schema(
+                description = "User's birth date. User must be at least 18 years old (calculated in America/Bogota timezone).",
+                example = "1990-01-15",
+                type = "string",
+                format = "date",
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         LocalDate birthDate,
 
-        @NotBlank(message = "Email is required")
-        @Email(message = "Invalid email format")
-        @Schema(description = "User's email address", example = "john.doe@example.com")
+        @Schema(
+                description = "User's email address. Must be a valid email format. Must be unique in the system.",
+                example = "juan.perez@empresa.com",
+                format = "email",
+                maxLength = 50,
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String email,
 
-        @NotBlank(message = "Password is required")
-        @Size(min = 8, message = "Password must be at least 8 characters long")
-        @Schema(description = "User's password")
+        @Schema(
+                description = "User's password. Will be encrypted before storing. Minimum 8 characters recommended.",
+                example = "mySecurePassword123",
+                minLength = 8,
+                requiredMode = Schema.RequiredMode.REQUIRED
+        )
         String password
 ) {
 }
