@@ -1,17 +1,17 @@
 package com.powerup.usermicroservice.domain.utils.validator.chain.impl;
 
-import com.powerup.usermicroservice.domain.exceptions.InvalidElementFormatException;
-import com.powerup.usermicroservice.domain.model.UserModel;
-import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import com.powerup.usermicroservice.domain.exceptions.InvalidElementFormatException;
+import com.powerup.usermicroservice.domain.model.UserModel;
+import com.powerup.usermicroservice.domain.utils.constants.DomainExceptionsConstants;
 
 class DocumentIdValidatorTest {
 

@@ -1,9 +1,9 @@
 package com.powerup.usermicroservice.infrastructure.mappers;
 
+import org.mapstruct.Mapper;
+
 import com.powerup.usermicroservice.domain.model.RoleModel;
 import com.powerup.usermicroservice.infrastructure.entities.RolEntity;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface RoleEntityMapper {
